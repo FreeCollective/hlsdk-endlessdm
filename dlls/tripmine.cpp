@@ -111,12 +111,12 @@ void CTripmineGrenade::Spawn( void )
 	if( pev->spawnflags & 1 )
 	{
 		// power up quickly
-		m_flPowerUp = gpGlobals->time + 1.0;
+		m_flPowerUp = gpGlobals->time + 2.0;
 	}
 	else
 	{
-		// power up in 2.5 seconds
-		m_flPowerUp = gpGlobals->time + 2.5;
+		// power up in 5 seconds
+		m_flPowerUp = gpGlobals->time + 5;
 	}
 
 	SetThink( &CTripmineGrenade::PowerupThink );

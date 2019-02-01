@@ -128,8 +128,8 @@ int CEgon::GetItemInfo( ItemInfo *p )
 	return 1;
 }
 
-#define EGON_PULSE_INTERVAL		0.1
-#define EGON_DISCHARGE_INTERVAL		0.1
+#define EGON_PULSE_INTERVAL		0.5
+#define EGON_DISCHARGE_INTERVAL		0.5
 
 float CEgon::GetPulseInterval( void )
 {
@@ -152,7 +152,7 @@ BOOL CEgon::HasAmmo( void )
 void CEgon::UseAmmo( int count )
 {
 	if( m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] >= count )
-		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= count;
+		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 0;
 	else
 		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] = 0;
 }

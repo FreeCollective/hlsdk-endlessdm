@@ -183,7 +183,7 @@ void CHgun::SecondaryAttack( void )
 
 	vecSrc = m_pPlayer->GetGunPosition() + gpGlobals->v_forward * 16 + gpGlobals->v_right * 8 + gpGlobals->v_up * -12;
 
-	m_iFirePhase++;
+//	m_iFirePhase++;
 	switch( m_iFirePhase )
 	{
 	case 1:

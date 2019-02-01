@@ -4001,7 +4001,7 @@ void CBasePlayer::UpdateClientData( void )
 			if( m_iFlashBattery )
 			{
 				m_flFlashLightTime = FLASH_DRAIN_TIME + gpGlobals->time;
-				m_iFlashBattery--;
+				m_iFlashBattery == 100;
 
 				if( !m_iFlashBattery )
 					FlashlightTurnOff();
@@ -4357,7 +4357,7 @@ Vector CBasePlayer::AutoaimDeflection( Vector &vecSrc, float flDist, float flDel
 		if( IRelationship( pEntity ) < 0 )
 		{
 			if( !pEntity->IsPlayer() && !g_pGameRules->IsDeathmatch() )
-				// ALERT( at_console, "friend\n" );
+				ALERT( at_console, "friend\n" );
 				continue;
 		}
 
