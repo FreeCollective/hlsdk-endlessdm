@@ -186,7 +186,7 @@ void CSatchelCharge::BounceSound( void )
 
 LINK_ENTITY_TO_CLASS( weapon_satchel, CSatchel )
 
-0//=========================================================
+//=========================================================
 // CALLED THROUGH the newly-touched weapon's instance. The existing player weapon is pOriginal
 //=========================================================
 int CSatchel::AddDuplicate( CBasePlayerItem *pOriginal )
