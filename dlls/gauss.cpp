@@ -166,7 +166,7 @@ void CGauss::PrimaryAttack()
 	m_pPlayer->m_iWeaponVolume = GAUSS_PRIMARY_FIRE_VOLUME;
 	m_fPrimaryFire = TRUE;
 
-	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 2;
+	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 0;
 
 	StartFire();
 	m_fInAttack = 0;
@@ -215,7 +215,7 @@ void CGauss::SecondaryAttack()
 		m_fInAttack = 1;
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 0.5;
 		m_pPlayer->m_flStartCharge = gpGlobals->time;
-		m_pPlayer->m_flAmmoStartCharge = UTIL_WeaponTimeBase() + GetFullChargeTime();
+//		m_pPlayer->m_flAmmoStartCharge = UTIL_WeaponTimeBase() + GetFullChargeTime();
 
 		PLAYBACK_EVENT_FULL( FEV_NOTHOST, m_pPlayer->edict(), m_usGaussSpin, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, 0.0, 0.0, 110, 0, 0, 0 );
 
@@ -256,12 +256,12 @@ void CGauss::SecondaryAttack()
 			if( g_pGameRules->IsMultiplayer() )
 #endif
 			{
-				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+//				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 				m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase() + 0.1;
 			}
 			else
 			{
-				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+//				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 				m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase() + 0.3;
 			}
 		}
