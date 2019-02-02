@@ -455,7 +455,7 @@ void CTripmine::PrimaryAttack( void )
 
 			CBaseEntity::Create( "monster_tripmine", tr.vecEndPos + tr.vecPlaneNormal * 8, angles, m_pPlayer->edict() );
 
-			m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+//			m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 
 			// player "shoot" animation
 			m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
