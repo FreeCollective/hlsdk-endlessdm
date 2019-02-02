@@ -125,7 +125,7 @@ void CHgun::Holster( int skiplocal /* = 0 */ )
 
 void CHgun::PrimaryAttack()
 {
-	Reload();
+//	Reload();
 
 	if(m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] <= 0)
 	{
@@ -167,8 +167,7 @@ void CHgun::PrimaryAttack()
 
 void CHgun::SecondaryAttack( void )
 {
-	Reload();
-
+//      Reload();
 	if( m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] <= 0 )
 	{
 		return;
@@ -249,16 +248,16 @@ void CHgun::Reload( void )
 	if( m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] >= HORNET_MAX_CARRY )
 		return;
 
-	while( m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] < HORNET_MAX_CARRY && m_flRechargeTime < gpGlobals->time )
-	{
-		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]++;
-		m_flRechargeTime += 0.5;
-	}
+//	while( m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] < HORNET_MAX_CARRY && m_flRechargeTime < gpGlobals->time )
+//	{
+//		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]++;
+//		m_flRechargeTime += 0.5;
+//	}
 }
 
 void CHgun::WeaponIdle( void )
 {
-	Reload();
+//	Reload();
 
 	if( m_flTimeWeaponIdle > UTIL_WeaponTimeBase() )
 		return;
