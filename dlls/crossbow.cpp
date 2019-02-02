@@ -407,7 +407,7 @@ void CCrossbow::FireBolt()
 
 	m_pPlayer->m_iWeaponVolume = QUIET_GUN_VOLUME;
 
-	m_iClip--;
+//	m_iClip--;
 
 	int flags;
 #if defined( CLIENT_WEAPONS )
