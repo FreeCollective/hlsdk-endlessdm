@@ -583,7 +583,9 @@ void CHalfLifeMultiplay::PlayerSpawn( CBasePlayer *pPlayer )
 	{
 		pPlayer->GiveNamedItem( "weapon_crowbar" );
 		pPlayer->GiveNamedItem( "weapon_9mmhandgun" );
+		pPlayer->GiveNamedItem( "weapon_shotgun" );
 		pPlayer->GiveAmmo( 68, "9mm", _9MM_MAX_CARRY );// 4 full reloads
+		pPlayer->GiveAmmo( 16, "buckshot", SHOTGUN_MAX_CLIP );
 	}
 }
 
