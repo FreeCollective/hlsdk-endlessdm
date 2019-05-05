@@ -461,8 +461,9 @@ void CRpg::PrimaryAttack()
 #endif
 		PLAYBACK_EVENT( flags, m_pPlayer->edict(), m_usRpg );
 
-//		m_iClip--; 
-
+if( endless.value == 0){
+		m_iClip--; 
+}
 		m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 1.5;
 

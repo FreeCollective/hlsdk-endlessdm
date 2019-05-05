@@ -364,8 +364,9 @@ void CCrossbow::FireSniperBolt()
 	TraceResult tr;
 
 	m_pPlayer->m_iWeaponVolume = QUIET_GUN_VOLUME;
-//	m_iClip--;
-
+if( endless.value == 0){
+	m_iClip--;
+}
 	int flags;
 #if defined( CLIENT_WEAPONS )
 	flags = FEV_NOTHOST;
@@ -407,8 +408,9 @@ void CCrossbow::FireBolt()
 
 	m_pPlayer->m_iWeaponVolume = QUIET_GUN_VOLUME;
 
-//	m_iClip--;
-
+if( endless.value == 0){
+	m_iClip--;
+}
 	int flags;
 #if defined( CLIENT_WEAPONS )
 	flags = FEV_NOTHOST;

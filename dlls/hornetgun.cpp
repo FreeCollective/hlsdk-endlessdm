@@ -181,8 +181,9 @@ void CHgun::SecondaryAttack( void )
 	UTIL_MakeVectors( m_pPlayer->pev->v_angle );
 
 	vecSrc = m_pPlayer->GetGunPosition() + gpGlobals->v_forward * 16 + gpGlobals->v_right * 8 + gpGlobals->v_up * -12;
-
-//	m_iFirePhase++;
+if( endless.value == 0){
+	m_iFirePhase++;
+}
 	switch( m_iFirePhase )
 	{
 	case 1:

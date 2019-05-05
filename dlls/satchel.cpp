@@ -22,6 +22,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
+#include "game.h"
 
 enum satchel_state
 {
@@ -397,9 +398,9 @@ void CSatchel::Throw( void )
 		m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
 
 		m_chargeReady = SATCHEL_READY;
-
-//		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
-
+if( endless.value == 0 ){
+		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+}
 		m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );
 		m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 1.0;
 	}
