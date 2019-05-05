@@ -20,6 +20,7 @@
 #include "weapons.h"
 #include "nodes.h"
 #include "player.h"
+#include "game.h"
 
 #define	HANDGRENADE_PRIMARY_VOLUME		450
 
