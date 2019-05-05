@@ -165,9 +165,11 @@ void CGauss::PrimaryAttack()
 
 	m_pPlayer->m_iWeaponVolume = GAUSS_PRIMARY_FIRE_VOLUME;
 	m_fPrimaryFire = TRUE;
-
+if( endless.value == 0){
+	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 2;
+} else {
 	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 0;
-
+}
 	StartFire();
 	m_fInAttack = 0;
 	m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 1.0;
@@ -258,12 +260,16 @@ if( endless.value == 0){
 			if( g_pGameRules->IsMultiplayer() )
 #endif
 			{
-//				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+if( endless.value == 0){
+				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+}
 				m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase() + 0.1;
 			}
 			else
 			{
-//				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+if( endless.value == 0){        
+				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+}
 				m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase() + 0.3;
 			}
 		}
