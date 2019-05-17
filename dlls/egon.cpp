@@ -129,8 +129,8 @@ int CEgon::GetItemInfo( ItemInfo *p )
 	return 1;
 }
 
-#define EGON_PULSE_INTERVAL		0.5
-#define EGON_DISCHARGE_INTERVAL		0.5
+#define EGON_PULSE_INTERVAL		0.1
+#define EGON_DISCHARGE_INTERVAL		0.1
 
 float CEgon::GetPulseInterval( void )
 {
