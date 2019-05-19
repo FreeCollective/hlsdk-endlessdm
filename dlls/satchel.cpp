@@ -398,7 +398,7 @@ void CSatchel::Throw( void )
 		m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
 
 		m_chargeReady = SATCHEL_READY;
-if( endless.value == 0 ){
+if(!endless.value){
 		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 }
 		m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );

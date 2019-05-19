@@ -47,6 +47,7 @@ cvar_t allow_spectators = { "allow_spectators", "0", FCVAR_SERVER };	// 0 preven
 cvar_t mp_chattime	= { "mp_chattime","10", FCVAR_SERVER };
 
 cvar_t endless		= { "mp_endless", "1", FCVAR_SERVER };
+cvar_t easyplay          = { "mp_easyplay", "0", FCVAR_SERVER };
 
 // Engine Cvars
 cvar_t *g_psv_gravity = NULL;
@@ -486,6 +487,7 @@ void GameDLLInit( void )
 	CVAR_REGISTER( &mp_chattime );
 
 	CVAR_REGISTER( &endless );
+        CVAR_REGISTER( &easyplay );
 
 // REGISTER CVARS FOR SKILL LEVEL STUFF
 	// Agrunt

@@ -297,9 +297,12 @@ void CRpg::Reload( void )
 	//
 	// Set the next attack time into the future so that WeaponIdle will get called more often
 	// than reload, allowing the RPG LTD to be updated
-	
-	m_flNextPrimaryAttack = GetNextAttackDelay( 0.8 );
-
+	if(!easyplay.value)
+	{
+	m_flNextPrimaryAttack = GetNextAttackDelay( 2.0 );
+	} else {
+	m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );
+	}
 	if( m_cActiveRockets && m_fSpotActive )
 	{
 		// no reloading when there are active missiles tracking the designator.
@@ -462,12 +465,18 @@ void CRpg::PrimaryAttack()
 #endif
 		PLAYBACK_EVENT( flags, m_pPlayer->edict(), m_usRpg );
 
-if( endless.value == 0){
+if(!endless.value){
 		m_iClip--; 
 }
+if(!easyplay.value)
+{
+		m_flNextPrimaryAttack = GetNextAttackDelay( 2.0 );
+		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 2.0;
+} else {
 		m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 1.5;
 
+}
 		ResetEmptySound();
 	}
 	else

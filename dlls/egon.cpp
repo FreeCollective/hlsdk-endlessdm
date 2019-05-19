@@ -153,7 +153,7 @@ BOOL CEgon::HasAmmo( void )
 void CEgon::UseAmmo( int count )
 {
 	if( m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] >= count )
-if( endless.value == 0){
+if(!endless.value){
 		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= count;
 } else {
  m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 0;

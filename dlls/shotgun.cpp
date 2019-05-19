@@ -1,4 +1,4 @@
-/***
+/****
 *
 *	Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 *	
@@ -22,7 +22,7 @@
 #include "player.h"
 #include "gamerules.h"
 #include "game.h"
-
+#include "skill.h";
 // special deathmatch shotgun spreads
 #define VECTOR_CONE_DM_SHOTGUN	Vector( 0.08716, 0.04362, 0.00 )// 10 degrees by 5 degrees
 #define VECTOR_CONE_DM_DOUBLESHOTGUN Vector( 0.17365, 0.04362, 0.00 ) // 20 degrees by 5 degrees
@@ -134,7 +134,7 @@ void CShotgun::PrimaryAttack()
 
 	m_pPlayer->m_iWeaponVolume = LOUD_GUN_VOLUME;
 	m_pPlayer->m_iWeaponFlash = NORMAL_GUN_FLASH;
-if( endless.value == 0 ){
+if(!endless.value){
 	m_iClip--;
 }
 	int flags;
@@ -144,7 +144,6 @@ if( endless.value == 0 ){
 	flags = 0;
 #endif
 	m_pPlayer->pev->effects = (int)( m_pPlayer->pev->effects ) | EF_MUZZLEFLASH;
-
 	// player "shoot" animation
 	m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
 
@@ -168,7 +167,6 @@ if( endless.value == 0 ){
 	}
 
 	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usSingleFire, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, vecDir.x, vecDir.y, 0, 0, 0, 0 );
-
 	if( !m_iClip && m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] <= 0 )
 		// HEV suit - indicate out of ammo condition
 		m_pPlayer->SetSuitUpdate( "!HEV_AMO0", FALSE, 0 );
@@ -204,7 +202,7 @@ void CShotgun::SecondaryAttack( void )
 
 	m_pPlayer->m_iWeaponVolume = LOUD_GUN_VOLUME;
 	m_pPlayer->m_iWeaponFlash = NORMAL_GUN_FLASH;
-if( endless.value == 0 ){
+if(!endless.value){
 	m_iClip -= 2;
 }
 	int flags;
@@ -244,7 +242,7 @@ if( endless.value == 0 ){
 		// HEV suit - indicate out of ammo condition
 		m_pPlayer->SetSuitUpdate( "!HEV_AMO0", FALSE, 0 );
 
-	//if( m_iClip != 0 )
+	if( m_iClip != 0 )
 		m_flPumpTime = gpGlobals->time + 0.95;
 
 	m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );
@@ -255,6 +253,12 @@ if( endless.value == 0 ){
 		m_flTimeWeaponIdle = 1.5;
 
 	m_fInSpecialReload = 0;
+if( m_fInAttack != 3)
+	{
+#ifndef CLIENT_DLL
+	m_pPlayer->pev->velocity = m_pPlayer->pev->velocity - gpGlobals->v_forward * gSkillData.plrDmgBuckshot * 10; // gauss-like recoil
+#endif
+	}
 }
 
 void CShotgun::Reload( void )

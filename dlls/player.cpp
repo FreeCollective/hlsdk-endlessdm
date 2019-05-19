@@ -4001,7 +4001,7 @@ void CBasePlayer::UpdateClientData( void )
 			if( m_iFlashBattery )
 			{
 				m_flFlashLightTime = FLASH_DRAIN_TIME + gpGlobals->time;
-if( endless.value == 0){        
+if(!endless.value){
 				m_iFlashBattery--;
 } else {
 				m_iFlashBattery == 100;

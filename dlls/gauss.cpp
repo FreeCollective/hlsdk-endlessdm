@@ -165,7 +165,7 @@ void CGauss::PrimaryAttack()
 
 	m_pPlayer->m_iWeaponVolume = GAUSS_PRIMARY_FIRE_VOLUME;
 	m_fPrimaryFire = TRUE;
-if( endless.value == 0){
+if(!endless.value){
 	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 2;
 } else {
 	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 0;
@@ -206,7 +206,7 @@ void CGauss::SecondaryAttack()
 		}
 
 		m_fPrimaryFire = FALSE;
-if( endless.value == 0){
+if(!endless.value){
 		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;// take one ammo just to start the spin
 }
 		m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase();
@@ -218,7 +218,7 @@ if( endless.value == 0){
 		m_fInAttack = 1;
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 0.5;
 		m_pPlayer->m_flStartCharge = gpGlobals->time;
-if( endless.value == 0){
+if(!endless.value){
 		m_pPlayer->m_flAmmoStartCharge = UTIL_WeaponTimeBase() + GetFullChargeTime();
 }
 		PLAYBACK_EVENT_FULL( FEV_NOTHOST, m_pPlayer->edict(), m_usGaussSpin, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, 0.0, 0.0, 110, 0, 0, 0 );
@@ -260,14 +260,14 @@ if( endless.value == 0){
 			if( g_pGameRules->IsMultiplayer() )
 #endif
 			{
-if( endless.value == 0){
+if(!endless.value){
 				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 }
 				m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase() + 0.1;
 			}
 			else
 			{
-if( endless.value == 0){        
+if(!endless.value){        
 				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 }
 				m_pPlayer->m_flNextAmmoBurn = UTIL_WeaponTimeBase() + 0.3;
@@ -287,7 +287,7 @@ if( endless.value == 0){
 		// ALERT( at_console, "%d %d %d\n", m_fInAttack, m_iSoundState, pitch );
 
 		if( m_iSoundState == 0 )
-			ALERT( at_console, "sound state %d\n", m_iSoundState );
+			// ALERT( at_console, "sound state %d\n", m_iSoundState );
 
 		PLAYBACK_EVENT_FULL( FEV_NOTHOST, m_pPlayer->edict(), m_usGaussSpin, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, 0.0, 0.0, pitch, 0, ( m_iSoundState == SND_CHANGE_PITCH ) ? 1 : 0, 0 );
 
@@ -352,7 +352,7 @@ void CGauss::StartFire( void )
 
 	if( m_fInAttack != 3 )
 	{
-		//ALERT( at_console, "Time:%f Damage:%f\n", gpGlobals->time - m_pPlayer->m_flStartCharge, flDamage );
+		// ALERT( at_console, "Time:%f Damage:%f\n", gpGlobals->time - m_pPlayer->m_flStartCharge, flDamage );
 #ifndef CLIENT_DLL
 		float flZVel = m_pPlayer->pev->velocity.z;
 

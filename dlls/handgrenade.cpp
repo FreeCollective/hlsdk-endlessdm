@@ -179,7 +179,7 @@ void CHandGrenade::WeaponIdle( void )
 		m_flNextPrimaryAttack = GetNextAttackDelay( 0.5 );
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 0.5;
 
-if( endless.value == 0){        
+if(!endless.value){
 		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 }
 		if( !m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] )
