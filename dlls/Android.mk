@@ -110,7 +110,8 @@ LOCAL_SRC_FILES := agrunt.cpp airtank.cpp \
            skill.cpp \
            sound.cpp \
            soundent.cpp \
-           spectator.cpp \
+           sniperrifle.cpp \
+	   spectator.cpp \
            squadmonster.cpp \
            squeakgrenade.cpp \
            subs.cpp \

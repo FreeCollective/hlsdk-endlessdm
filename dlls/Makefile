@@ -149,6 +149,7 @@ OBJ = \
 	$(DLL_OBJDIR)/skill.o \
 	$(DLL_OBJDIR)/sound.o \
 	$(DLL_OBJDIR)/soundent.o \
+	$(DLL_OBJDIR)/sniperrifle.o \
 	$(DLL_OBJDIR)/spectator.o \
 	$(DLL_OBJDIR)/squadmonster.o \
 	$(DLL_OBJDIR)/squeakgrenade.o \

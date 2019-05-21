@@ -70,14 +70,15 @@ public:
 #define WEAPON_CHAINGUN			5
 #define WEAPON_CROSSBOW			6
 #define WEAPON_SHOTGUN			7
-#define WEAPON_RPG				8
+#define WEAPON_RPG			8
 #define WEAPON_GAUSS			9
-#define WEAPON_EGON				10
+#define WEAPON_EGON			10
 #define WEAPON_HORNETGUN		11
 #define WEAPON_HANDGRENADE		12
 #define WEAPON_TRIPMINE			13
 #define	WEAPON_SATCHEL			14
 #define	WEAPON_SNARK			15
+#define WEAPON_SNIPERRIFLE		22
 
 #define WEAPON_ALLWEAPONS		(~(1<<WEAPON_SUIT))
 
@@ -94,6 +95,7 @@ public:
 #define MP5_WEIGHT			15
 #define SHOTGUN_WEIGHT		15
 #define CROSSBOW_WEIGHT		10
+#define SNIPERRIFLE_WEIGHT		10
 #define RPG_WEIGHT			20
 #define GAUSS_WEIGHT		20
 #define EGON_WEIGHT			20
@@ -107,10 +109,11 @@ public:
 #define URANIUM_MAX_CARRY		150
 #define	_9MM_MAX_CARRY			250
 #define _357_MAX_CARRY			36
+#define _762_MAX_CARRY                  15
 #define BUCKSHOT_MAX_CARRY		125
 #define BOLT_MAX_CARRY			50
 #define ROCKET_MAX_CARRY		8
-#define HANDGRENADE_MAX_CARRY	15
+#define HANDGRENADE_MAX_CARRY		15
 #define SATCHEL_MAX_CARRY		10
 #define TRIPMINE_MAX_CARRY		10
 #define SNARK_MAX_CARRY			5
@@ -127,11 +130,12 @@ public:
 #define MP5_DEFAULT_AMMO		25
 #define SHOTGUN_MAX_CLIP		8
 #define CROSSBOW_MAX_CLIP		5
+#define SNIPERRIFLE_MAX_CLIP            5
 #define RPG_MAX_CLIP			1
 #define GAUSS_MAX_CLIP			WEAPON_NOCLIP
 #define EGON_MAX_CLIP			WEAPON_NOCLIP
 #define HORNETGUN_MAX_CLIP		WEAPON_NOCLIP
-#define HANDGRENADE_MAX_CLIP	WEAPON_NOCLIP
+#define HANDGRENADE_MAX_CLIP		WEAPON_NOCLIP
 #define SATCHEL_MAX_CLIP		WEAPON_NOCLIP
 #define TRIPMINE_MAX_CLIP		WEAPON_NOCLIP
 #define SNARK_MAX_CLIP			WEAPON_NOCLIP
@@ -144,6 +148,7 @@ public:
 #define MP5_M203_DEFAULT_GIVE		0
 #define SHOTGUN_DEFAULT_GIVE		12
 #define CROSSBOW_DEFAULT_GIVE		5
+#define SNIPERRIFLE_DEFAULT_GIVE 		15
 #define RPG_DEFAULT_GIVE			1
 #define GAUSS_DEFAULT_GIVE			20
 #define EGON_DEFAULT_GIVE			20
@@ -157,6 +162,7 @@ public:
 #define AMMO_URANIUMBOX_GIVE	20
 #define AMMO_GLOCKCLIP_GIVE		GLOCK_MAX_CLIP
 #define AMMO_357BOX_GIVE		PYTHON_MAX_CLIP
+#define AMMO_762BOX_GIVE                        5
 #define AMMO_MP5CLIP_GIVE		MP5_MAX_CLIP
 #define AMMO_CHAINBOX_GIVE		200
 #define AMMO_M203BOX_GIVE		2
@@ -175,10 +181,11 @@ typedef	enum
 	BULLET_PLAYER_357, // python
 	BULLET_PLAYER_BUCKSHOT, // shotgun
 	BULLET_PLAYER_CROWBAR, // crowbar swipe
-
+	BULLET_PLAYER_762, // sniperrifle
 	BULLET_MONSTER_9MM,
 	BULLET_MONSTER_MP5,
-	BULLET_MONSTER_12MM
+	BULLET_MONSTER_12MM,
+	BULLET_MONSTER_762 // sniperrifle
 } Bullet;
 
 #define ITEM_FLAG_SELECTONEMPTY		1
@@ -562,7 +569,6 @@ public:
 	int iItemSlot( void ) { return 3; }
 	int GetItemInfo(ItemInfo *p);
 	int AddToPlayer( CBasePlayer *pPlayer );
-
 	void PrimaryAttack( void );
 	void SecondaryAttack( void );
 	int SecondaryAmmoIndex( void );
@@ -594,7 +600,6 @@ public:
 	void Precache( void );
 	int iItemSlot( ) { return 3; }
 	int GetItemInfo(ItemInfo *p);
-
 	void FireBolt( void );
 	void FireSniperBolt( void );
 	void PrimaryAttack( void );
@@ -634,7 +639,6 @@ public:
 	int iItemSlot( ) { return 3; }
 	int GetItemInfo(ItemInfo *p);
 	int AddToPlayer( CBasePlayer *pPlayer );
-
 	void PrimaryAttack( void );
 	void SecondaryAttack( void );
 	BOOL Deploy( );
@@ -658,6 +662,45 @@ private:
 	unsigned short m_usDoubleFire;
 	unsigned short m_usSingleFire;
 };
+
+class CSniperrifle : public CBasePlayerWeapon
+{
+public:
+        void Spawn(void);
+        void Precache(void);
+        int iItemSlot(void) { return 3; }
+        int GetItemInfo(ItemInfo *p);
+        int AddToPlayer(CBasePlayer *pPlayer);
+        void PrimaryAttack(void);
+        void SecondaryAttack(void);
+        BOOL Deploy( );
+        void Holster(int skiplocal = 0);
+        void Reload(void);
+        void WeaponIdle(void);
+        //void ItemPostFrame(void);
+
+        BOOL ShouldWeaponIdle(void) { return TRUE; };
+
+        BOOL m_fInZoom;// don't save this.
+
+        virtual BOOL UseDecrement(void)
+        {
+#if defined( CLIENT_WEAPONS )
+                return TRUE;
+#else
+                return FALSE;
+#endif
+        }
+
+        BOOL m_fNeedAjustBolt;
+        int      m_iBoltState;
+
+        enum SNIPER_BOLTSTATE { BOLTSTATE_FINE = 0, BOLTSTATE_ADJUST, BOLTSTATE_ADJUSTING, };
+
+private:
+        unsigned short m_usSniper;
+};
+
 
 class CLaserSpot : public CBaseEntity
 {

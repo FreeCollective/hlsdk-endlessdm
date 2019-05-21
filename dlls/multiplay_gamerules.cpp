@@ -179,6 +179,10 @@ void CHalfLifeMultiplay::RefreshSkillData( void )
 	// Tripmine
 	gSkillData.plrDmgTripmine = 150;
 
+	// Sniper Rifle
+	gSkillData.plrDmg762 = 100;
+        gSkillData.monDmg762 = 100;
+
 	// hornet
 	gSkillData.plrDmgHornet = 10;
 }

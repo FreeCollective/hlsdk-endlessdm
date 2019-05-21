@@ -272,8 +272,12 @@ void CGameRules::RefreshSkillData ( void )
 
 	// MONSTER HORNET
 	gSkillData.monDmgHornet = GetSkillCvar( "sk_hornet_dmg" );
-
-	// PLAYER HORNET
+	
+	// Sniper Rifle
+        gSkillData.plrDmg762 = GetSkillCvar( "sk_plr_762_bullet" );
+        gSkillData.monDmg762 = GetSkillCvar( "sk_plr_762_bullet" );
+	
+// PLAYER HORNET
 // Up to this point, player hornet damage and monster hornet damage were both using
 // monDmgHornet to determine how much damage to do. In tuning the hivehand, we now need
 // to separate player damage and monster hivehand damage. Since it's so late in the project, we've
