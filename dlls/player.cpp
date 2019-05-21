@@ -3599,6 +3599,12 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 				pEntity->SetThink( &CBaseEntity::SUB_Remove );
 		}
 		break;
+	case 234:
+		// gives weapon_sniperrifle
+		{
+                GiveNamedItem( "weapon_sniperrifle" );
+                GiveNamedItem( "ammo_762" );
+		}
 	}
 #endif	// HLDEMO_BUILD
 }
