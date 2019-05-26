@@ -299,7 +299,7 @@ void CRpg::Reload( void )
 	// than reload, allowing the RPG LTD to be updated
 	if(!easyplay.value)
 	{
-	m_flNextPrimaryAttack = GetNextAttackDelay( 2.0 );
+	m_flNextPrimaryAttack = GetNextAttackDelay( 4.0 );
 	} else {
 	m_flNextPrimaryAttack = GetNextAttackDelay( 1.5 );
 	}
