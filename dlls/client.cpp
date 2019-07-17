@@ -1765,6 +1765,7 @@ void UpdateClientData( const struct edict_s *ent, int sendweapons, struct client
 			cd->ammo_rockets = pl->ammo_rockets;
 			cd->ammo_cells = pl->ammo_uranium;
 			cd->vuser2.x = pl->ammo_hornets;
+			cd->vuser2.y = pl->ammo_762;
 
 			if( pl->m_pActiveItem )
 			{
@@ -1787,11 +1788,6 @@ void UpdateClientData( const struct edict_s *ent, int sendweapons, struct client
 						cd->vuser2.y = ( (CRpg *)pl->m_pActiveItem )->m_fSpotActive;
 						cd->vuser2.z = ( (CRpg *)pl->m_pActiveItem )->m_cActiveRockets;
 					}
-					if (pl->m_pActiveItem->m_iId == WEAPON_SNIPERRIFLE)
-                                        {
-                                                cd->vuser2.y = pl->ammo_762;
-                                        }
-					
 				}
 			}
 		}

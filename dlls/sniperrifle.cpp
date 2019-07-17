@@ -21,6 +21,41 @@
 #include "nodes.h"
 #include "player.h"
 #include "game.h"
+#include "unpredictedweapon.h"
+
+#define WEAPON_SNIPERRIFLE 26
+#define SNIPERRIFLE_WEIGHT 10
+#define SNIPERRIFLE_MAX_CLIP 5
+#define SNIPERRIFLE_DEFAULT_GIVE 5
+#define _762_MAX_CARRY 15
+#define AMMO_762BOX_GIVE 5
+
+class CSniperrifle : public CBasePlayerWeaponU
+{
+public:
+        void Spawn(void);
+        void Precache(void);
+        int iItemSlot(void) { return 3; }
+        int GetItemInfo(ItemInfo *p);
+        int AddToPlayer(CBasePlayer *pPlayer);
+        void PrimaryAttack(void);
+        void SecondaryAttack(void);
+        BOOL Deploy(void);
+        void Holster(int skiplocal = 0);
+        void Reload(void);
+        void WeaponIdle(void);
+        //void ItemPostFrame(void);
+
+        BOOL ShouldWeaponIdle(void) { return TRUE; };
+
+        BOOL m_fInZoom;// don't save this.
+
+        BOOL m_fNeedAjustBolt;
+        int      m_iBoltState;
+
+        enum SNIPER_BOLTSTATE { BOLTSTATE_FINE = 0, BOLTSTATE_ADJUST, BOLTSTATE_ADJUSTING, };
+};
+
 
 enum sniper_e {
 	SNIPER_DRAW = 0,
@@ -64,7 +99,7 @@ void CSniperrifle::Precache( void )
 	PRECACHE_SOUND ("weapons/sniper_reload3.wav");
 	PRECACHE_SOUND ("weapons/sniper_zoom.wav");
 
-	m_usSniper = PRECACHE_EVENT( 1, "events/sniper.sc" );
+//	m_usSniper = PRECACHE_EVENT( 1, "events/sniper.sc" );
 }
 
 int CSniperrifle::GetItemInfo(ItemInfo *p)
@@ -125,7 +160,7 @@ void CSniperrifle::SecondaryAttack()
 		m_pPlayer->pev->fov = m_pPlayer->m_iFOV = 15;
 		m_fInZoom = 1;
 	}
-	
+
 	EMIT_SOUND_DYN(ENT(m_pPlayer->pev), CHAN_ITEM, "weapons/sniper_zoom.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
 
 	pev->nextthink = UTIL_WeaponTimeBase() + 0.1;
@@ -156,10 +191,12 @@ void CSniperrifle::PrimaryAttack()
 	}
 
 	float flSpread = 0.001;
-if(!endless.value)
-{
-	m_iClip--;
-}
+
+	if(!endless.value)
+	{
+		m_iClip--;
+	}
+
 	m_pPlayer->pev->effects = (int)(m_pPlayer->pev->effects) | EF_MUZZLEFLASH;
 
 	int flags;
@@ -181,9 +218,10 @@ if(!endless.value)
 
 	Vector vecDir;
 
-	vecDir = m_pPlayer->FireBulletsPlayer( 1, vecSrc, vecAiming, Vector( flSpread, flSpread, flSpread ), 8192, BULLET_PLAYER_762, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed );
+	vecDir = m_pPlayer->FireBulletsPlayer( 1, vecSrc, vecAiming, Vector( flSpread, flSpread, flSpread ), 8192, BULLET_PLAYER_MP5, 0, 100, m_pPlayer->pev, m_pPlayer->random_seed ); // damage is 100
 	m_flNextPrimaryAttack = 1.75;
-	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usSniper, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, vecDir.x, vecDir.y, 0, 0, ( m_iClip == 0 ) ? 1 : 0, 0 );
+
+	//PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usSniper, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, vecDir.x, vecDir.y, 0, 0, ( m_iClip == 0 ) ? 1 : 0, 0 );
 
 	if (!m_iClip && m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] <= 0)
 	// HEV suit - indicate out of ammo condition
